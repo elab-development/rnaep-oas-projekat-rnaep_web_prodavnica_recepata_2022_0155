@@ -13,7 +13,7 @@ class AuthMiddleware
         $token = $request->bearerToken();
  
         if (!$token) {
-            return response()->json(['error' => 'No token provided'], 401);
+            return response()->json(['error' => 'Token ne postoji'], 401);
         }
  
         try {
@@ -22,7 +22,7 @@ class AuthMiddleware
                 ->get(env('USER_SERVICE_URL') . '/verify');
  
             if (!$response->successful()) {
-                return response()->json(['error' => 'Invalid or expired token'], 401);
+                return response()->json(['error' => 'Token je nevalidan ili je istekao'], 401);
             }
  
             $user = $response->json();
@@ -33,7 +33,7 @@ class AuthMiddleware
  
         } catch (\Throwable $e) {
             Log::error('[Gateway] Auth verification failed: ' . $e->getMessage());
-            return response()->json(['error' => 'Authentication service unavailable'], 503);
+            return response()->json(['error' => 'Servis za autentifikaciju nije dostupan'], 503);
         }
  
         return $next($request);
