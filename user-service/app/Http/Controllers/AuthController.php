@@ -50,4 +50,22 @@ class AuthController extends Controller
             'token'   => $result['token'],
         ]);
     }
+    
+    public function logout(Request $request)
+    {
+        $this->authService->logout($request->user());
+ 
+        return response()->json(['message' => 'Logged out']);
+    }
+ 
+    public function verify(Request $request)
+    {
+        $user = $request->user();
+ 
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+ 
+        return $this->authService->verify($user);
+    }
 }  

@@ -18,7 +18,6 @@ class AuthService
 
     public function register(array $data): array
     {
-        // XSS zaštita - sanitizacija
         $data['email'] = htmlspecialchars(strip_tags($data['email']));
 
         $user = $this->userRepository->create([
@@ -61,5 +60,15 @@ class AuthService
             'email'   => $user->email,
             'role'    => $user->role,
         ];
+    }
+
+    public function logout(User $user): void
+    {
+        $this->tokenService->revokeCurrentToken($user);
+    }
+
+    public function verify(User $user): array
+    {
+        return $this->formatUser($user);
     }
 }

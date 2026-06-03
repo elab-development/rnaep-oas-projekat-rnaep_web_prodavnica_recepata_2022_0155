@@ -13,6 +13,7 @@ class CsrfProtection
         'api/auth/login',
         'api/auth/register',
         'api/csrf-token',
+        'api/auth/logout'
     ];
 
     public function handle(Request $request, Closure $next): mixed
