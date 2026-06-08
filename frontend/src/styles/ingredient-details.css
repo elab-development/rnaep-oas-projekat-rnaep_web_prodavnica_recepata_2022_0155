@@ -1,0 +1,131 @@
+:root{
+  --primary: #124559;
+  --primary-2: #1f6b7a;
+  --text: #0b1f24;
+  --muted: rgba(11, 31, 36, 0.70);
+  --border: rgba(18, 69, 89, 0.18);
+  --surface: rgba(255, 255, 255, 0.82);
+  --focus-ring: rgba(31, 107, 122, 0.22);
+}
+
+.ingd-page{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  color: var(--text);
+}
+
+.ingd-top{
+  margin-bottom: 14px;
+}
+
+.ingd-back{
+  color: var(--primary);
+  text-decoration: none;
+  opacity: .85;
+  font-weight: 700;
+}
+
+.ingd-back:hover{
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.ingd-card{
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 18px;
+  border: 1px solid rgba(18, 69, 89, 0.14);
+  border-radius: 16px;
+  background: var(--surface);
+  backdrop-filter: blur(8px);
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(11, 31, 36, 0.08);
+}
+
+.ingd-media{
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(18, 69, 89, 0.05);
+  border: 1px solid rgba(18, 69, 89, 0.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height: 260px;
+}
+
+.ingd-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+}
+
+.ingd-body{
+  padding: 6px 4px;
+}
+
+.ingd-title{
+  margin: 0 0 10px;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.ingd-meta{
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+  max-width: 520px;
+}
+
+.ingd-metaRow{
+  display:flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(18, 69, 89, 0.14);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.70);
+}
+
+.ingd-label{
+  opacity: .75;
+}
+
+.ingd-value{
+  font-weight: 900;
+}
+
+.ingd-descBlock{
+  margin-top: 14px;
+}
+
+.ingd-subtitle{
+  margin: 0 0 8px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.ingd-desc{
+  margin: 0;
+  line-height: 1.6;
+  padding: 12px 12px;
+  border: 1px solid rgba(18, 69, 89, 0.14);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.70);
+  white-space: pre-wrap;
+}
+
+@media (max-width: 860px){
+  .ingd-card{
+    grid-template-columns: 1fr;
+  }
+  .ingd-media{
+    min-height: 220px;
+  }
+  .ingd-title{
+    font-size: 22px;
+  }
+}
