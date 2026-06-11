@@ -128,16 +128,30 @@ class CartService
  
     private function formatCart(\App\Models\Cart $cart): array
     {
+        $ids = $cart->cartItems
+            ->pluck('ingredient_id')
+            ->unique()
+            ->toArray();
+
+        $ingredients = $this->catalogService->getIngredientsByIds($ids);
+
+        $ingredientMap = collect($ingredients)
+            ->keyBy('ingredient_id');
+
         return [
             'cart_id'               => $cart->cart_id,
             'user_id'               => $cart->user_id,
             'total_amount_of_items' => (int)$cart->total_amount_of_items,
             'total_price'           => (float)$cart->total_price,
-            'items'                 => $cart->cartItems->map(fn($it) => [
-                'cart_item_id'  => $it->cart_item_id,
-                'ingredient_id' => $it->ingredient_id,
-                'amount'        => (int)$it->amount,
-            ])->values(),
+            'items' => $cart->cartItems->map(function ($it) use ($ingredientMap) {
+                return [
+                    'cart_item_id'  => $it->cart_item_id,
+                    'ingredient_id' => $it->ingredient_id,
+                    'amount'        => (int)$it->amount,
+
+                    'ingredient'    => $ingredientMap[$it->ingredient_id] ?? null,
+                ];
+            })->values(),
         ];
     }
     public function updateItem(int $userId, \App\Models\CartItem $cartItem, int $amount): array

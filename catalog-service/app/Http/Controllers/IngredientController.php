@@ -128,4 +128,16 @@ class IngredientController extends Controller
             abort(403, 'Only admins can perform this action');
         }
     }
+    public function decrementStock(Request $request)
+    {
+        $request->validate([
+            'items' => 'required|array',
+            'items.*.ingredient_id' => 'required|string',
+            'items.*.amount' => 'required|numeric|min:0.01',
+        ]);
+
+        $this->ingredientService->decrementStock($request->input('items', []));
+
+        return response()->json(['message' => 'Stock updated']);
+    }
 }
