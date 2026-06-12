@@ -93,4 +93,16 @@ class IngredientService
             'updated_at'     => $ingredient->updated_at,
         ];
     }
+    public function decrementStock(array $items): void
+    {
+        foreach ($items as $item) {
+            $ingredient = $this->ingredientRepository->find($item['ingredient_id']);
+            if (!$ingredient) {
+                continue;
+            }
+
+            $newStock = max(0, (float) ($ingredient->stock_quantity ?? 0) - (float) $item['amount']);
+            $ingredient->update(['stock_quantity' => $newStock]);
+        }
+    }
 }
