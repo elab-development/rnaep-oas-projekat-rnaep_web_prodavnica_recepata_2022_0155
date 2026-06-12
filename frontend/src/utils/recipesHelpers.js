@@ -6,15 +6,14 @@ export function normalizeCollection(maybeResourceCollection) {
 }
 
 export function idsToCsv(ids) {
-  const clean = (ids || []).filter((x) => Number.isFinite(x) && x > 0);
+  const clean = (ids || []).filter((x) => x); 
   return clean.length ? clean.join(",") : "";
 }
 
 export function toggleId(list, id) {
-  const n = Number(id);
-  return list.includes(n) ? list.filter((x) => x !== n) : [...list, n];
+  return list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
 }
 
 export function removeId(list, id) {
-  return list.filter((x) => Number(x) !== Number(id));
+  return list.filter((x) => x !== id);
 }

@@ -42,7 +42,7 @@ export default function IngredientPicker({
 
         <div className="picker-list">
           {filtered.map((ing) => {
-            const id = Number(ing.id);
+            const id = ing.id;
             const isOn = selectedIds.includes(id);
 
             return (

@@ -27,7 +27,7 @@ function RecipesPage() {
 
   const ingredientById = useMemo(() => {
     const m = new Map();
-    for (const ing of allIngredients) m.set(Number(ing.id), ing);
+    for (const ing of allIngredients) m.set(ing.id, ing);
     return m;
   }, [allIngredients]);
 
