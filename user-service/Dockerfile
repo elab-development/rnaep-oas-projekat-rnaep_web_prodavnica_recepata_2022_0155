@@ -17,7 +17,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html/storage
 RUN chmod -R 775 /var/www/html/storage
 
-COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY dockerapache.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
 EXPOSE 80
