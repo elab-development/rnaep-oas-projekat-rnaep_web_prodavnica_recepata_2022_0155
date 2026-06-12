@@ -205,6 +205,20 @@ services:
     networks:
       - recipe-net
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: recipesshop-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      CHOKIDAR_USEPOLLING: 'true'
+      VITE_API_URL: http://localhost:8000/api
+    networks:
+      - recipe-net
+
   phpmyadmin-users:
     image: phpmyadmin/phpmyadmin
     ports:

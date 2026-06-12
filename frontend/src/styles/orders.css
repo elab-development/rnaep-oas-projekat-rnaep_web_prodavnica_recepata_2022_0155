@@ -1,0 +1,232 @@
+:root{
+  --app-bg: #eae4e8;
+  --primary: #124559;
+  --primary-2: #1f6b7a;
+  --primary-soft: rgba(18, 69, 89, 0.14);
+
+  --text: #0b1f24;
+  --muted: rgba(11, 31, 36, 0.70);
+
+  --surface: rgba(255, 255, 255, 0.82);
+  --border: rgba(18, 69, 89, 0.18);
+  --shadow: 0 10px 30px rgba(11, 31, 36, 0.10);
+
+  --danger: #ef4444;
+  --danger-soft: rgba(239, 68, 68, 0.12);
+}
+
+.orders-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 14px 48px;
+  color: var(--text);
+}
+
+.orders-page > h2 {
+  margin: 0 0 14px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.orders-loading {
+  padding: 14px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--muted);
+  font-weight: 700;
+  border: 1px solid var(--border);
+}
+
+.orders-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.order-card {
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid rgba(18, 69, 89, 0.14);
+  box-shadow:
+    0 8px 24px rgba(11, 31, 36, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.order-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid rgba(18, 69, 89, 0.12);
+}
+
+.order-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.order-status {
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(18, 69, 89, 0.18);
+  background: rgba(18, 69, 89, 0.06);
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.order-status.pending {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.28);
+  color: #92400e;
+}
+.order-status.paid {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.26);
+  color: #166534;
+}
+.order-status.fulfilled {
+  background: rgba(18, 69, 89, 0.12);
+  border-color: rgba(31, 107, 122, 0.28);
+  color: #124559;
+}
+.order-status.cancelled {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.22);
+  color: #991b1b;
+}
+
+.order-meta {
+  padding: 12px 14px 2px;
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.order-meta b {
+  color: var(--text);
+  font-weight: 900;
+}
+
+.order-items {
+  padding: 10px 14px 14px;
+}
+
+.order-items-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 6px 0 10px;
+}
+
+.order-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.order-items li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 10px;
+  padding: 10px 10px;
+  border-radius: 14px;
+  background: rgba(18, 69, 89, 0.06);
+  border: 1px solid rgba(18, 69, 89, 0.10);
+}
+
+.oi-name {
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.oi-qty {
+  color: var(--muted);
+  font-weight: 700;
+  justify-self: end;
+}
+
+.oi-line {
+  grid-column: 1 / -1;
+  color: var(--text);
+  font-weight: 900;
+  justify-self: start;
+}
+
+@media (min-width: 520px) {
+  .order-items li {
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+  }
+
+  .oi-qty {
+    justify-self: end;
+    white-space: nowrap;
+  }
+
+  .oi-line {
+    grid-column: auto;
+    justify-self: end;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 820px) {
+  .orders-page {
+    padding: 22px 18px 60px;
+  }
+
+  .orders-page > h2 {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+
+  .orders-list {
+    gap: 16px;
+  }
+
+  .order-head {
+    padding: 16px 16px 12px;
+  }
+
+  .order-meta,
+  .order-items {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .order-title {
+    font-size: 16px;
+  }
+}
+
+.alert {
+  margin: 12px 0;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(18, 69, 89, 0.14);
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--text);
+}
+
+.alert-error {
+  border-color: rgba(239, 68, 68, 0.22);
+  background: rgba(239, 68, 68, 0.10);
+  color: #7f1d1d;
+}
