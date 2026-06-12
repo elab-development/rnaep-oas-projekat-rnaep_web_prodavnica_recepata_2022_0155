@@ -6,7 +6,7 @@ export default function FilterTags({ title, ids, ingredientById, onRemove }) {
       <div className="hint">{title}:</div>
       <div className="tags">
         {ids.map((id) => {
-          const ing = ingredientById.get(Number(id));
+          const ing = ingredientById.get(id);
           const label = ing ? ing.name : `#${id}`;
           return (
             <span key={id} className="tag">
