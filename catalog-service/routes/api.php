@@ -36,3 +36,5 @@ Route::delete('/recipes/{id}',      [RecipeController::class, 'destroy']);
 Route::get('/public/recipes',       [ExternalRecipeController::class, 'search']);
 
 Route::post('/internal/decrement-stock', [IngredientController::class, 'decrementStock']);
+
+Route::get('/metrics', [MetricsController::class, 'index']);

@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/verify', [AuthController::class, 'verify']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+
+Route::get('/metrics', [MetricsController::class, 'index']);

@@ -26,4 +26,4 @@ Route::delete('/cart/items/{cartItem}', [CartController::class, 'removeItem']);
 Route::put('/cart/items/{cartItem}', [CartController::class, 'updateItem']);
 Route::post('/cart/from-recipes', [CartController::class, 'addFromRecipes']);
 Route::post('/cart/checkout',      [OrderController::class, 'checkout']);
-
+Route::get('/metrics', [MetricsController::class, 'index']);
