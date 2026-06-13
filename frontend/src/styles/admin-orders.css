@@ -1,0 +1,147 @@
+.admOrd-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admOrd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admOrd-header h1 {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: -0.5px;
+}
+
+.admOrd-tableWrap {
+  background: #fff;
+  border: 1px solid #e6e8eb;
+  border-radius: 14px;
+  overflow: auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.admOrd-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 980px;
+}
+
+.admOrd-table th,
+.admOrd-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef1f4;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admOrd-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  font-weight: 800;
+  color: #0f172a;
+  z-index: 1;
+}
+
+.admOrd-table tbody tr:hover {
+  background: #f6fbfc;
+}
+
+.admOrd-rowActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.admOrd-select {
+  border: 1px solid #d9dde3;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 14px;
+  background: #fff;
+  outline: none;
+}
+
+.admOrd-select:focus {
+  border-color: #0b7285;
+  box-shadow: 0 0 0 3px rgba(11, 114, 133, 0.12);
+}
+
+.admOrd-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  color: #334155;
+}
+
+.admOrd-detailsRow td {
+  background: #fbfdff;
+}
+
+.admOrd-detailsCard {
+  border: 1px solid #e6e8eb;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+}
+
+.admOrd-detailsTop {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.admOrd-muted {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.admOrd-itemsWrap {
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid #eef1f4;
+}
+
+.admOrd-items {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.admOrd-items th,
+.admOrd-items td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef1f4;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admOrd-items thead th {
+  background: #f8fafc;
+  font-weight: 800;
+}
+
+.admOrd-stats {
+  margin-bottom: 14px;
+}
+
+.admOrd-statCard {
+  background: #fff;
+  border: 1px solid #e6e8eb;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.admOrd-statTitle {
+  margin: 0 0 10px;
+  font-size: 18px;
+}

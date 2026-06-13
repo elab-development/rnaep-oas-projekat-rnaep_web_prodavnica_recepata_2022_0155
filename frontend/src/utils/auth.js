@@ -9,3 +9,8 @@ export function canAddToCart() {
   const { isAuth, role } = getAuth();
   return isAuth && role === "user";
 }
+
+export function isAdmin() {
+  const { isAuth, role } = getAuth();
+  return isAuth && role === "admin";
+}
