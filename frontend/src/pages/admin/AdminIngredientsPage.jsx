@@ -8,6 +8,7 @@ const emptyForm = {
   unit: "",
   category: "",
   type: "",
+  stock_quantity: "",
   description: "",
 };
 
@@ -29,7 +30,7 @@ export default function AdminIngredientsPage() {
       .filter(Boolean)
       .map((r) => ({
         ...r,
-        _id: r.ingredient_id ?? r.id, 
+        _id: r.ingredient_id ?? r.id,
       }));
   }, [rows]);
 
@@ -37,7 +38,7 @@ export default function AdminIngredientsPage() {
     setLoading(true);
     setError("");
     try {
-      const res = await api.get("/catalog/ingredients"); 
+      const res = await api.get("/catalog/ingredients");
       const list = res.data?.ingredients ?? [];
       setRows(Array.isArray(list) ? list : []);
     } catch (e) {
@@ -67,6 +68,7 @@ export default function AdminIngredientsPage() {
         unit: ing.unit ?? "",
         category: ing.category ?? "",
         type: ing.type ?? "",
+        stock_quantity: ing.stock_quantity ?? "",
         description: ing.description ?? "",
       });
     } catch (e) {
@@ -89,15 +91,16 @@ export default function AdminIngredientsPage() {
       unit: form.unit,
       category: form.category || null,
       type: form.type || null,
+      stock_quantity: form.stock_quantity !== "" ? Number(form.stock_quantity) : null,
       description: form.description || null,
     };
 
     try {
-       if (editingId) {
-          await api.put(`/catalog/ingredients/${editingId}`, payload);
-        } else {
-          await api.post(`/catalog/ingredients`, payload);
-        }
+      if (editingId) {
+        await api.put(`/catalog/ingredients/${editingId}`, payload);
+      } else {
+        await api.post(`/catalog/ingredients`, payload);
+      }
       await load();
       cancelEdit();
     } catch (e2) {
@@ -113,7 +116,7 @@ export default function AdminIngredientsPage() {
   const remove = async (id) => {
     if (!confirm("Da li ste sigurni da želite da obrišete sastojak?")) return;
     try {
-      await api.delete(`/catalog/ingredients/${id}`); 
+      await api.delete(`/catalog/ingredients/${id}`);
       await load();
     } catch (e) {
       alert(e?.response?.data?.error || e?.response?.data?.message || e.message || "Greška pri brisanju.");
@@ -137,7 +140,7 @@ export default function AdminIngredientsPage() {
 
             <div className="admIng-grid">
               <label>
-                Naziv 
+                Naziv
                 <input
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -146,7 +149,7 @@ export default function AdminIngredientsPage() {
               </label>
 
               <label>
-                Cena 
+                Cena
                 <input
                   type="number"
                   step="0.01"
@@ -157,7 +160,7 @@ export default function AdminIngredientsPage() {
               </label>
 
               <label>
-                Jedinica 
+                Jedinica
                 <input
                   value={form.unit}
                   onChange={(e) => setForm({ ...form, unit: e.target.value })}
@@ -178,6 +181,17 @@ export default function AdminIngredientsPage() {
                 <input
                   value={form.type}
                   onChange={(e) => setForm({ ...form, type: e.target.value })}
+                />
+              </label>
+
+              <label>
+                Stanje na lageru
+                <input
+                  type="number"
+                  step="1"
+                  min="0"
+                  value={form.stock_quantity}
+                  onChange={(e) => setForm({ ...form, stock_quantity: e.target.value })}
                 />
               </label>
 
@@ -214,6 +228,7 @@ export default function AdminIngredientsPage() {
                   <th>Cena</th>
                   <th>Kategorija</th>
                   <th>Tip</th>
+                  <th>Na lageru</th>
                   <th>Akcije</th>
                 </tr>
               </thead>
@@ -226,6 +241,7 @@ export default function AdminIngredientsPage() {
                     <td>{Number(r.price ?? 0)}</td>
                     <td>{r.category ?? "-"}</td>
                     <td>{r.type ?? "-"}</td>
+                    <td>{r.stock_quantity ?? "-"}</td>
                     <td className="admIng-rowActions">
                       <button className="btn--secondary" onClick={() => startEdit(r._id)}>
                         Izmeni
@@ -238,7 +254,7 @@ export default function AdminIngredientsPage() {
                 ))}
                 {!normalized.length && (
                   <tr>
-                    <td colSpan={7} style={{ padding: 14 }}>Nema stavki.</td>
+                    <td colSpan={8} style={{ padding: 14 }}>Nema stavki.</td>
                   </tr>
                 )}
               </tbody>
