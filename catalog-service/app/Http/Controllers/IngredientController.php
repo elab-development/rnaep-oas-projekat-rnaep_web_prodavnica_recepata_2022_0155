@@ -111,7 +111,7 @@ class IngredientController extends Controller
         ]);
 
         $ingredient = $this->ingredientService->getById($id);
-        $current = (float) ($ingredient->stock_quantity ?? 0);
+        $current = (float) ($ingredient['stock_quantity'] ?? 0);
         $ingredient = $this->ingredientService->update($id, [
             'stock_quantity' => $current + (float) $validated['amount'],
         ]);
