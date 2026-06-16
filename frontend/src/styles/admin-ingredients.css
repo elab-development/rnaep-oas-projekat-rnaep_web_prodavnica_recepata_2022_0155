@@ -1,0 +1,158 @@
+.admIng-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admIng-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admIng-header h1 {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: -0.5px;
+}
+
+.admIng-form {
+  background: #fff;
+  border: 1px solid #e6e8eb;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.admIng-subtitle {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.admIng-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.admIng-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: #1f2a37;
+}
+
+.admIng-grid input,
+.admIng-grid textarea {
+  border: 1px solid #d9dde3;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+}
+
+.admIng-grid input:focus,
+.admIng-grid textarea:focus {
+  border-color: #0b7285;
+  box-shadow: 0 0 0 3px rgba(11, 114, 133, 0.12);
+}
+
+.admIng-desc {
+  grid-column: 1 / -1;
+}
+
+.admIng-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.admIng-tableWrap {
+  background: #fff;
+  border: 1px solid #e6e8eb;
+  border-radius: 14px;
+  overflow: auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.admIng-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.admIng-table th,
+.admIng-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef1f4;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admIng-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  font-weight: 700;
+  color: #0f172a;
+  z-index: 1;
+}
+
+.admIng-table tbody tr:hover {
+  background: #f6fbfc;
+}
+
+.admIng-rowActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.admIng-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  color: #334155;
+}
+
+.btn--primary,
+.btn--secondary {
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: transform 0.06s ease, filter 0.12s ease, background 0.12s ease;
+}
+
+.btn--primary:active,
+.btn--secondary:active {
+  transform: translateY(1px);
+}
+
+.btn--secondary {
+  background: #0b7285; 
+  color: #fff;
+  border-color: rgba(255,255,255,0.12);
+}
+
+.btn--secondary:hover {
+  filter: brightness(1.03);
+}
+
+.btn--secondary.btn--danger {
+  background: #d9480f;
+  border-color: rgba(255,255,255,0.12);
+}
+
+.btn--secondary.btn--danger:hover {
+  filter: brightness(1.03);
+}

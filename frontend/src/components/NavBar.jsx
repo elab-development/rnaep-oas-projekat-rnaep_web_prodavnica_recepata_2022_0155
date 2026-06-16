@@ -65,8 +65,12 @@ function NavBar() {
               <NavLink className={linkClass} to="/orders">
                 Porudžbine
               </NavLink>
-
-              {role === "admin" && <span className="navbar__pill">Admin</span>}
+              
+              {role === "admin" && (
+                <NavLink className={linkClass} to="/admin">
+                  Admin panel
+                </NavLink>
+              )}
 
               <button
                 className="navbar__button navbar__button--danger"
