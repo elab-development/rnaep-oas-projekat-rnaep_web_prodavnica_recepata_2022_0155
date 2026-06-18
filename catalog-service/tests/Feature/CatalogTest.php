@@ -13,6 +13,18 @@ class CatalogTest extends TestCase
     {
         parent::setUp();
 
+
+    $database = config('database.connections.mongodb.database');
+
+    if ($database !== 'catalog_test') {
+
+        throw new \RuntimeException(
+
+            'Testovi se ne smeju pokretati nad ovom bazom: ' . $database
+
+        );
+
+    }
         Ingredient::query()->delete();
         Recipe::query()->delete();
         RecipeItem::query()->delete();
