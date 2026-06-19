@@ -64,7 +64,6 @@ services:
       kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic order-created --partitions 1 --replication-factor 1 &&
       kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic inventory-updated --partitions 1 --replication-factor 1 &&
       kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic greska-pri-obradi --partitions 1 --replication-factor 1 &&
-      kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic order-status-changed --partitions 1 --replication-factor 1
       "
     networks:
       - recipe-net
