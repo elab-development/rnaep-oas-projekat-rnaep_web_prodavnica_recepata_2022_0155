@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\ExternalRecipeController;
+use App\Http\Controllers\MetricsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,5 @@ Route::delete('/recipes/{id}',      [RecipeController::class, 'destroy']);
 Route::get('/public/recipes',       [ExternalRecipeController::class, 'search']);
 
 Route::post('/internal/decrement-stock', [IngredientController::class, 'decrementStock']);
+
+Route::get('/metrics', [MetricsController::class, 'index']);

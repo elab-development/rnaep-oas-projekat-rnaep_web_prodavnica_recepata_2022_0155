@@ -1,0 +1,175 @@
+name: CI - Test and Build
+
+on:
+  push:
+    branches:
+      - develop
+      - 'feature/**'
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  test-user-service:
+    name: Test User Service
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: users_test
+        ports:
+          - 3307:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_mysql, zip, mbstring
+      - name: Install dependencies
+        working-directory: ./user-service
+        run: composer install --no-interaction --prefer-dist
+      - name: Configure environment
+        working-directory: ./user-service
+        run: |
+          cp .env.example .env
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_PORT=3307" >> .env
+          echo "DB_DATABASE=users_test" >> .env
+          echo "DB_USERNAME=root" >> .env
+          echo "DB_PASSWORD=root" >> .env
+          php artisan key:generate
+      - name: Run migrations
+        working-directory: ./user-service
+        run: php artisan migrate --force
+      - name: Run tests
+        working-directory: ./user-service
+        run: php artisan test
+
+  test-ordering-service:
+    name: Test Ordering Service
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: orders_test
+        ports:
+          - 3308:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install librdkafka
+        run: sudo apt-get update && sudo apt-get install -y librdkafka-dev
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_mysql, zip, mbstring, rdkafka
+          tools: pecl
+      - name: Install dependencies
+        working-directory: ./ordering-service
+        run: composer install --no-interaction --prefer-dist
+      - name: Configure environment
+        working-directory: ./ordering-service
+        run: |
+          cp .env.example .env
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_PORT=3308" >> .env
+          echo "DB_DATABASE=orders_test" >> .env
+          echo "DB_USERNAME=root" >> .env
+          echo "DB_PASSWORD=root" >> .env
+          echo "CATALOG_SERVICE_URL=http://localhost/api" >> .env
+          echo "KAFKA_BROKERS=localhost:9092" >> .env
+          php artisan key:generate
+      - name: Run migrations
+        working-directory: ./ordering-service
+        run: php artisan migrate --force
+      - name: Run tests
+        working-directory: ./ordering-service
+        run: php artisan test
+
+  test-catalog-service:
+    name: Test Catalog Service
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install librdkafka
+        run: sudo apt-get update && sudo apt-get install -y librdkafka-dev
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: zip, mbstring, mongodb, rdkafka
+          tools: pecl
+      - name: Install dependencies
+        working-directory: ./catalog-service
+        run: composer install --no-interaction --prefer-dist
+      - name: Configure environment
+        working-directory: ./catalog-service
+        run: |
+          cp .env.example .env
+          echo "DB_CONNECTION=mongodb" >> .env
+          echo "MONGODB_HOST=127.0.0.1" >> .env
+          echo "MONGODB_PORT=27017" >> .env
+          echo "MONGODB_DATABASE=catalog_test" >> .env
+          echo "KAFKA_BROKERS=localhost:9092" >> .env
+          php artisan key:generate
+      - name: Run tests
+        working-directory: ./catalog-service
+        run: php artisan test
+
+  test-frontend:
+    name: Test Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
+
+  build-docker-images:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs:
+      - test-user-service
+      - test-ordering-service
+      - test-catalog-service
+      - test-frontend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build user-service image
+        run: docker build ./user-service -t recipe-user-service:ci
+      - name: Build catalog-service image
+        run: docker build ./catalog-service -t recipe-catalog-service:ci
+      - name: Build ordering-service image
+        run: docker build ./ordering-service -t recipe-ordering-service:ci
+      - name: Build api-gateway image
+        run: docker build ./api-gateway -t recipe-api-gateway:ci
+      - name: Build frontend image
+        run: docker build ./frontend -t recipe-frontend:ci

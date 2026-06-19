@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -26,4 +27,4 @@ Route::delete('/cart/items/{cartItem}', [CartController::class, 'removeItem']);
 Route::put('/cart/items/{cartItem}', [CartController::class, 'updateItem']);
 Route::post('/cart/from-recipes', [CartController::class, 'addFromRecipes']);
 Route::post('/cart/checkout',      [OrderController::class, 'checkout']);
-
+Route::get('/metrics', [MetricsController::class, 'index']);
