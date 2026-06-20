@@ -1,0 +1,106 @@
+.admRec-page {
+  padding: 18px;
+  margin: 0 6%;
+}
+
+.admRec-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.admRec-form {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.admRec-subtitle {
+  margin: 0 0 10px 0;
+}
+
+.admRec-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.admRec-grid label input,
+.admRec-grid label textarea,
+.admRec-itemRow label select,
+.admRec-itemRow label input {
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.14);
+  outline: none;
+}
+
+.admRec-desc textarea {
+  resize: vertical;
+}
+
+.admRec-items {
+  margin-top: 10px;
+  border-top: 1px dashed rgba(0,0,0,0.12);
+  padding-top: 10px;
+}
+
+.admRec-itemsHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.admRec-itemRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr auto;
+  gap: 10px;
+  align-items: end;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+.admRec-itemMeta .muted {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.admRec-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.admRec-tableWrap {
+  overflow: auto;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.admRec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admRec-table th,
+.admRec-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  text-align: left;
+  vertical-align: top;
+}
+
+.admRec-rowActions {
+  display: flex;
+  gap: 8px;
+}
